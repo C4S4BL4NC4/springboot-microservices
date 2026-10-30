@@ -5,6 +5,7 @@ public record PatientResponseDTO(
         String name,
         String email,
         String address,
-        String dob
+        String dob,
+        String registrationDate
 ) {
 }
