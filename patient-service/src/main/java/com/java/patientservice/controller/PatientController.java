@@ -3,6 +3,8 @@ package com.java.patientservice.controller;
 import com.java.patientservice.dto.PatientRequestDTO;
 import com.java.patientservice.dto.PatientResponseDTO;
 import com.java.patientservice.service.PatientService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +16,15 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
+@Tag(name = "Patients", description = "Patients management API.")
 public class PatientController {
     private static final String PATIENT_PATH = "/api/patients";
     private static final String PATIENT_PATH_ID = PATIENT_PATH + "/{id}";
     private final PatientService patientService;
 
+
     @GetMapping(PATIENT_PATH)
+    @Operation(summary = "Get patients")
     public ResponseEntity<List<PatientResponseDTO>> getPatients(
             @RequestParam(required = false) String name) {
         List<PatientResponseDTO> patients = (name == null || name.isBlank())
@@ -29,11 +34,13 @@ public class PatientController {
     }
 
     @GetMapping(PATIENT_PATH_ID)
+    @Operation(summary = "Get patient via ID")
     public ResponseEntity<PatientResponseDTO> getPatientById(@PathVariable UUID id) {
         return ResponseEntity.ok(patientService.getPatientById(id));
     }
 
     @PostMapping(PATIENT_PATH)
+    @Operation(summary = "Create a new patient")
     public ResponseEntity<PatientResponseDTO> createPatient(
             @Valid @RequestBody PatientRequestDTO patientRequestDTO) {
         PatientResponseDTO created = patientService.createPatient(patientRequestDTO);
@@ -42,6 +49,7 @@ public class PatientController {
     }
 
     @PutMapping(PATIENT_PATH_ID)
+    @Operation(summary = "Update a patient")
     public ResponseEntity<PatientResponseDTO> updatePatientById(
             @PathVariable UUID id,
             @Valid @RequestBody PatientRequestDTO patientRequestDTO) {
@@ -49,6 +57,7 @@ public class PatientController {
     }
 
     @DeleteMapping(PATIENT_PATH_ID)
+    @Operation(summary = "Delete a patient")
     public ResponseEntity<Void> deletePatientById(@PathVariable UUID id) {
         patientService.deletePatientById(id);
         return ResponseEntity.noContent().build();
