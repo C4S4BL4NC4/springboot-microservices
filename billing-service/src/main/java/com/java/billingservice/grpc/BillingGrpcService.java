@@ -18,7 +18,7 @@ public class BillingGrpcService extends BillingServiceGrpc.BillingServiceImplBas
 
         log.info("createBillingAccount request received {}", billingRequest.toString());
 
-        // Business logic - e.g save to database, perform calculates etc
+        // Business logic - e.g. save to database, perform calculates etc
 
         billing.BillingResponse response = billing.BillingResponse.newBuilder()
                 .setAccountId("12345")
