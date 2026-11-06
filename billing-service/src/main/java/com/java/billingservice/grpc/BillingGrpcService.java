@@ -22,7 +22,7 @@ public class BillingGrpcService extends BillingServiceGrpc.BillingServiceImplBas
 
         billing.BillingResponse response = billing.BillingResponse.newBuilder()
                 .setAccountId("12345")
-                .setStatus("ACTIVE")
+                .setStatus("success - grpc requests amongst services")
                 .build();
 
         responseObserver.onNext(response);

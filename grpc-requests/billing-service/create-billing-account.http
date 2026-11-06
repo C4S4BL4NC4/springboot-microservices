@@ -1,7 +1,11 @@
+IMPORT ../../billing-service/src/main/proto/billing_service.proto
+
+###
 GRPC localhost:9001/BillingService/createBillingAccount
+Content-Type: application/json
 
 {
-  "patientId": "12333",
+  "patientId": "123",
   "name": "John Doe",
-  "email": "john.doe@example.com"
+  "email": "john@example.com"
 }
